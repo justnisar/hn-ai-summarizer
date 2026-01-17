@@ -1,28 +1,34 @@
-# Hacker News AI Summarizer 🚀
+# HN AI Summarizer
 
-A "Cyborg" browser extension that upgrades Hacker News with Multimodal AI capabilities.
+A local browser extension and backend service that enhances Hacker News by providing AI-generated summaries of linked articles.
 
-This project uses a hybrid architecture: a **Tampermonkey script** modifies the browser UI to add controls, while a **Python/Flask** backend uses **Playwright** (computer vision) and **Google Gemini 2.5 Flash** to read and summarize articles.
+This project implements a hybrid architecture using a client-side UserScript for UI integration and a local Python/Flask server for data processing. It utilizes **Google Gemini 2.5 Flash** for multimodal analysis (Text + Vision) to generate technical summaries that include context from charts, diagrams, and code blocks.
 
-## ✨ Features
+## Key Features
 
-* **Multimodal Analysis:** Doesn't just read text—it takes a full screenshot of the page so the AI can "see" charts, diagrams, and code snippets.
-* **Visual Upgrade:** Injects a modern UI into Hacker News with bold formatting and clean bullet points.
-* **Privacy First:** The AI server runs locally on your machine. Your API keys never leave your `.env` file.
-* **Smart Scrolling:** Automatically handles lazy-loading images before capturing content.
-* **One-Click Launcher:** Includes a macOS automation script for instant startup.
+* **Multimodal RAG:** Captures both page text and full-page screenshots to provide context-aware summaries.
+* **Local Execution:** The backend runs locally, ensuring API keys and data processing remain on the user's machine.
+* **Smart Rendering:** Uses a headless browser (Playwright) to handle lazy-loading assets and dynamic content before analysis.
+* **UI Integration:** Seamlessly injects controls into the existing Hacker News interface via Tampermonkey.
 
-## 🛠️ Architecture
+## Technical Architecture
 
-1.  **The "Hands" (Frontend):** A UserScript (`.user.js`) injects checkboxes and buttons into `news.ycombinator.com`.
-2.  **The "Bridge" (Flask):** A local Python server listens for requests on port 5000.
-3.  **The "Eyes" (Playwright):** A headless Chromium browser opens the link, scrolls to load assets, and captures a screenshot + text.
-4.  **The "Brain" (Gemini 2.5):** Google's Flash model processes the text and image together to generate a cynical, technical summary.
+The application consists of four main components:
+1.  **Frontend (JavaScript):** A Tampermonkey script that modifies the DOM of `news.ycombinator.com` to add selection checkboxes and a "Summarize" trigger.
+2.  **API Layer (Flask):** A lightweight local server listening on port 5000 that accepts URLs from the frontend.
+3.  **Data Extraction (Playwright):** A headless Chromium instance that renders pages, handles scrolling for lazy-loaded elements, and extracts both text and screenshots.
+4.  **Inference (Google Gemini):** The data is sent to the Gemini 2.5 Flash model to generate concise, technical bullet points.
 
-## 📦 Installation
+## Prerequisites
+
+* Python 3.8+
+* Google AI Studio API Key
+* Tampermonkey Browser Extension
+
+## Installation
 
 ### 1. Backend Setup
-Clone the repository and prepare the Python environment.
+Clone the repository and install the dependencies:
 
 ```bash
 git clone [https://github.com/YOUR_USERNAME/hn-ai-summarizer.git](https://github.com/YOUR_USERNAME/hn-ai-summarizer.git)
@@ -32,7 +38,7 @@ cd hn-ai-summarizer
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Install dependencies
+# Install libraries
 pip install -r requirements.txt
 pip install playwright
 python3 -m playwright install chromium
