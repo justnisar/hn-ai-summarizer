@@ -1,36 +1,74 @@
-HN AI Summarizer
-A local browser extension and backend service that enhances Hacker News by providing AI-generated summaries of linked articles.
+# HN AI Summarizer 🚀
 
-This project implements a hybrid architecture using a client-side UserScript for UI integration and a local Python/Flask server for data processing. It utilizes Google Gemini 2.5 Flash for multimodal analysis (Text + Vision) to generate technical summaries.
+A professional local backend service and browser extension that adds AI-generated summaries to Hacker News articles. 
 
-Key Features
-Multimodal RAG: Captures page text and screenshots to provide context-aware summaries.
+This project uses **Google Gemini 2.5 Flash** for multimodal analysis, processing both page text and full-page screenshots.
 
-Local Execution: The backend runs locally, ensuring API keys remain on the user's machine.
+---
 
-Smart Rendering: Uses Playwright to handle lazy-loading assets before analysis.
+## 🛠️ Key Features
 
-UI Integration: Injects controls into Hacker News via Tampermonkey.
+* **Multimodal RAG:** Analyzes both text and images for high-context summaries.
+* **Local Execution:** Runs locally on your machine to keep API keys secure.
+* **Smart Rendering:** Uses Playwright to handle lazy-loading content.
+* **Clean UI:** Injects summarized views directly into Hacker News via Tampermonkey.
 
-Technical Architecture
-Frontend: Tampermonkey script modifies the DOM of Hacker News.
+## Technical Architecture
 
-API Layer: Local Flask server on port 5000.
+The application consists of four main components:
+1. **Frontend (JavaScript):** A Tampermonkey script modifies the DOM of Hacker News.
+2. **API Layer (Flask):** A local server on port 5000 that accepts URLs.
+3. **Data Extraction (Playwright):** A headless browser captures screenshots and text.
+4. **Inference (Google Gemini):** Multimodal processing of text and images.
 
-Extraction: Playwright captures screenshots and text.
+## Prerequisites
 
-Inference: Gemini 2.5 Flash processes the data.
+* Python 3.8+
+* Google AI Studio API Key
+* Tampermonkey Browser Extension
 
-Installation & Setup
-Backend: ```bash python3 -m venv .venv source .venv/bin/activate pip install -r requirements.txt python3 -m playwright install chromium
+## Installation
 
+### 1. Backend Setup
+Clone the repository and install the dependencies:
 
-Configuration: Create a .env file and add: GOOGLE_API_KEY=your_key_here
+```bash
+git clone [https://github.com/justnisar/hn-ai-summarizer.git](https://github.com/justnisar/hn-ai-summarizer.git)
+cd hn-ai-summarizer
 
-Frontend: Install hn_summarizer.user.js into Tampermonkey.
+```bash
+# Create and activate virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
 
-Usage
-Run the server using ./start_server.command and use the "Summarize" button on Hacker News.
+# Install libraries
+pip install -r requirements.txt
+python3 -m playwright install chromium
 
-License
+### Chunk 7: Configuration
+```markdown
+### 2. Configuration
+Create a `.env` file in the root directory to store your API key:
+
+```bash
+echo "GOOGLE_API_KEY=your_actual_api_key" > .env
+
+### Chunk 8: Usage Instructions
+```markdown
+## 🚀 Usage
+
+1. **Start the Server:** Run the automation script or start manually:
+```bash
+./start_server.command
+
+2. **Setup Frontend:** Install `hn_summarizer.user.js` in Tampermonkey.
+
+3. **Summarize:** Click the orange button on any Hacker News page.
+
+## 📝 License
+MIT License
+
+### Chunk 9: License (The End)
+```markdown
+## 📝 License
 MIT License
