@@ -13,30 +13,15 @@ This project uses **Google Gemini 2.5 Flash** for multimodal analysis, processin
 * **Smart Rendering:** Uses Playwright to handle lazy-loading content.
 * **Clean UI:** Injects summarized views directly into Hacker News via Tampermonkey.
 
-## Technical Architecture
-
-The application consists of four main components:
-1. **Frontend (JavaScript):** A Tampermonkey script modifies the DOM of Hacker News.
-2. **API Layer (Flask):** A local server on port 5000 that accepts URLs.
-3. **Data Extraction (Playwright):** A headless browser captures screenshots and text.
-4. **Inference (Google Gemini):** Multimodal processing of text and images.
-
-## Prerequisites
-
-* Python 3.8+
-* Google AI Studio API Key
-* Tampermonkey Browser Extension
-
-## Installation
+## ⚙️ Installation
 
 ### 1. Backend Setup
-Clone the repository and install the dependencies:
+Clone the repository and install the Python dependencies:
 
 ```bash
 git clone [https://github.com/justnisar/hn-ai-summarizer.git](https://github.com/justnisar/hn-ai-summarizer.git)
 cd hn-ai-summarizer
 
-```bash
 # Create and activate virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
@@ -44,31 +29,38 @@ source .venv/bin/activate
 # Install libraries
 pip install -r requirements.txt
 python3 -m playwright install chromium
+```
 
-### Chunk 7: Configuration
-```markdown
 ### 2. Configuration
 Create a `.env` file in the root directory to store your API key:
 
 ```bash
 echo "GOOGLE_API_KEY=your_actual_api_key" > .env
+```
 
-### Chunk 8: Usage Instructions
-```markdown
 ## 🚀 Usage
 
-1. **Start the Server:** Run the automation script or start manually:
+**1. Start the Server**
+Run the backend service using the provided shell script or manually via Python:
+
 ```bash
+# Option 1: Automation Script
 ./start_server.command
 
-2. **Setup Frontend:** Install `hn_summarizer.user.js` in Tampermonkey.
+# Option 2: Manual Start
+source .venv/bin/activate
+python3 server.py
+```
 
-3. **Summarize:** Click the orange button on any Hacker News page.
+**2. Setup Frontend**
+* Ensure the **Tampermonkey** extension is installed in your browser.
+* Navigate to the file `hn_summarizer.user.js` in this repository.
+* Click the **Raw** button to install the script.
+
+**3. Generating Summaries**
+* Open [Hacker News](https://news.ycombinator.com).
+* Select the checkboxes next to the articles you wish to read.
+* Click the orange **"✨ Summarize Selected"** button.
 
 ## 📝 License
-MIT License
-
-### Chunk 9: License (The End)
-```markdown
-## 📝 License
-MIT License
+This project is open-source and available under the **MIT License**.
