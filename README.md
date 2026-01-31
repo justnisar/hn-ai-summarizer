@@ -35,6 +35,7 @@ python3 -m playwright install chromium
 Create a `.env` file in the root directory to store your API key:
 
 ```bash
+Get key from https://aistudio.google.com/app/api-keys
 echo "GOOGLE_API_KEY=your_actual_api_key" > .env
 ```
 
